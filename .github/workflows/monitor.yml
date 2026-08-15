@@ -1,0 +1,51 @@
+name: Monitor NYRR 9+1 Volunteer Spots
+
+"on":
+  workflow_dispatch:
+  schedule:
+    # Every 30 minutes, UTC. This cadence is a ceiling (SPEC.md) — don't
+    # tighten it without deliberately revisiting that decision. Unlike
+    # reminder.yml's fixed local-time crons, this one doesn't drift across
+    # EST/EDT since "every 30 minutes" means the same thing in any zone.
+    - cron: "*/30 * * * *"
+
+permissions:
+  contents: write
+
+jobs:
+  monitor:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: "pip"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+        # No `playwright install` browser download here: discovery.py found
+        # the volunteer cards are plain server-rendered HTML with no JSON
+        # API behind them, so scraper.py only needs `requests` + `bs4` at
+        # runtime, not a real browser. Playwright itself is only used by
+        # discovery.py, which is run manually, not on this schedule.
+
+      - name: Run monitor
+        env:
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+        run: python main.py
+
+      - name: Commit updated state.json if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet -- state.json; then
+            echo "state.json unchanged, nothing to commit."
+          else
+            git add state.json
+            git commit -m "Update state.json"
+            git push
+          fi
