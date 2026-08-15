@@ -93,6 +93,7 @@ races:
 | File | Purpose |
 |---|---|
 | `discovery.py` | Manual, one-off: checks robots.txt and saves real page HTML/network traffic for a race. Run this after adding a new race. |
+| `robots.py` | Shared robots.txt check used by both `discovery.py` and `scraper.py`. `scraper.py` re-checks live on every run — never trusts `config/races.yaml`'s cached flag alone. |
 | `scraper.py` | Parses the current opportunity cards for all active, robots-allowed races and applies the 9+1/AVAILABLE/no-background-check match. |
 | `state.py` | Tracks which roles currently match, per race, in `state.json`; diffs so only newly-opened roles trigger a notification. |
 | `notify.py` | Sends pushes via ntfy.sh. Run `python notify.py --test` to verify delivery. |
