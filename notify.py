@@ -16,6 +16,10 @@ import requests
 NTFY_PUBLISH_URL = "https://ntfy.sh/"
 REQUEST_TIMEOUT_SECONDS = 15
 
+# ntfy's JSON publish endpoint requires numeric priority (1-5), unlike the
+# header-based publish API which accepts these names directly.
+_PRIORITY_NAME_TO_NUMBER = {"min": 1, "low": 2, "default": 3, "high": 4, "urgent": 5}
+
 
 def _get_topic() -> str:
     topic = os.environ.get("NTFY_TOPIC")
@@ -29,7 +33,7 @@ def _publish(title: str, message: str, priority: str = "default", click: str = N
         "topic": _get_topic(),
         "title": title,
         "message": message,
-        "priority": priority,
+        "priority": _PRIORITY_NAME_TO_NUMBER[priority],
     }
     if click:
         payload["click"] = click

@@ -31,7 +31,7 @@ def test_send_opening_alert_payload():
     assert payload["topic"] == "test-topic"
     assert "Bag Check" in payload["title"]
     assert "Frosty 5K" in payload["title"]
-    assert payload["priority"] == "urgent"
+    assert payload["priority"] == 5  # urgent
     assert payload["click"] == "https://register.nyrr.org/x"
 
 
@@ -54,7 +54,7 @@ def test_send_robots_blocked_reminder_lists_all_races():
     payload = mock_post.call_args.kwargs["json"]
     assert "Race A" in payload["message"]
     assert "Race B" in payload["message"]
-    assert payload["priority"] == "default"
+    assert payload["priority"] == 3  # default
 
 
 def test_send_canary_alert_is_distinct_from_opening_alert():
@@ -64,7 +64,7 @@ def test_send_canary_alert_is_distinct_from_opening_alert():
     payload = mock_post.call_args.kwargs["json"]
     assert "MONITOR BROKEN" in payload["title"]
     assert "selector not found" in payload["message"]
-    assert payload["priority"] == "high"
+    assert payload["priority"] == 4  # high
     assert payload["tags"] != ["rotating_light"]
 
 
