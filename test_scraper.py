@@ -8,8 +8,9 @@ for).
 """
 
 from pathlib import Path
+from unittest.mock import patch
 
-from scraper import STATUS_AVAILABLE, STATUS_FILLED, parse_opportunities
+from scraper import STATUS_AVAILABLE, STATUS_FILLED, parse_opportunities, scrape_race
 
 FIXTURE_HTML = (Path(__file__).resolve().parent / "discovery_output" / "frosty-5k" / "rendered.html").read_text()
 FIXTURE_URL = "https://events.nyrr.org/nyrr-frosty-5k-volunteers"
@@ -93,6 +94,31 @@ def test_available_9plus1_with_background_check_does_not_match():
     """
     opportunities = parse_opportunities(html, FIXTURE_URL)
     assert opportunities[0].is_match() is False
+
+
+def test_scrape_race_skips_when_config_says_robots_allowed_false():
+    race = {"race_id": "x", "url": "https://events.nyrr.org/x", "robots_allowed": False}
+    with patch("scraper.check_robots_allowed") as mock_check, patch("scraper.requests.get") as mock_get:
+        result = scrape_race(race)
+
+    mock_check.assert_not_called()  # cheap pre-filter short-circuits before any network call
+    mock_get.assert_not_called()
+    assert result["error"] == "skipped: robots_allowed is not true"
+
+
+def test_scrape_race_rechecks_robots_txt_live_even_when_config_says_allowed():
+    # Config says allowed, but a fresh robots.txt check disagrees (e.g. NYRR
+    # changed it since the last discovery.py run) — must not fetch the page.
+    race = {"race_id": "x", "url": "https://events.nyrr.org/x", "robots_allowed": True}
+    with patch("scraper.check_robots_allowed", return_value=False) as mock_check, patch(
+        "scraper.requests.get"
+    ) as mock_get:
+        result = scrape_race(race)
+
+    mock_check.assert_called_once_with("https://events.nyrr.org/x")
+    mock_get.assert_not_called()
+    assert result["error"] is not None
+    assert "robots.txt" in result["error"]
 
 
 def test_no_register_link_falls_back_to_race_url():

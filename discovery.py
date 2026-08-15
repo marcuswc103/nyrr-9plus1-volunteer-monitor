@@ -15,20 +15,12 @@ gate from SPEC.md.
 """
 
 import json
-import sys
-import urllib.error
-import urllib.request
-import urllib.robotparser
 from pathlib import Path
-from urllib.parse import urlparse
 
 import yaml
 from playwright.sync_api import sync_playwright
 
-USER_AGENT = (
-    "NYRR9Plus1VolunteerMonitor/0.1 "
-    "(personal, non-commercial monitoring tool; contact: marcuscalero3@gmail.com)"
-)
+from robots import USER_AGENT, check_robots_allowed
 
 ROBOTS_THRESHOLD = 5
 
@@ -45,42 +37,6 @@ def load_config():
 def save_config(config):
     with open(CONFIG_PATH, "w") as f:
         yaml.safe_dump(config, f, sort_keys=False, default_flow_style=False)
-
-
-def check_robots_allowed(url: str) -> bool:
-    """Check robots.txt for the given URL's origin using urllib.robotparser.
-
-    robotparser's own read() uses urllib's default "Python-urllib/x.y" User-
-    Agent, which this site 403s (it's blocking generic script UAs, not
-    necessarily disallowing us specifically). We fetch robots.txt ourselves
-    with our honest, identifiable User-Agent and feed the text to the
-    parser, so a UA-based 403 doesn't get misread as "disallow all".
-    """
-    parsed = urlparse(url)
-    robots_url = f"{parsed.scheme}://{parsed.netloc}/robots.txt"
-    rp = urllib.robotparser.RobotFileParser()
-    rp.set_url(robots_url)
-    try:
-        req = urllib.request.Request(robots_url, headers={"User-Agent": USER_AGENT})
-        with urllib.request.urlopen(req, timeout=15) as resp:
-            raw = resp.read()
-        rp.parse(raw.decode("utf-8").splitlines())
-    except urllib.error.HTTPError as e:
-        if e.code in (401, 403):
-            print(f"  robots.txt fetch got HTTP {e.code} for our UA — treating as disallowed (fail closed).")
-            return False
-        elif 400 <= e.code < 500:
-            print(f"  robots.txt returned HTTP {e.code} (no robots.txt) — treating as allowed.")
-            return True
-        else:
-            print(f"  WARNING: robots.txt fetch failed with HTTP {e.code}: {e}")
-            print("  Treating as disallowed (fail closed).")
-            return False
-    except Exception as e:
-        print(f"  WARNING: could not fetch/parse {robots_url}: {e}")
-        print("  Treating as disallowed (fail closed).")
-        return False
-    return rp.can_fetch(USER_AGENT, url)
 
 
 def run_discovery_for_race(race: dict, playwright):

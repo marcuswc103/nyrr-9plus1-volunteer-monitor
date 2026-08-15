@@ -15,10 +15,7 @@ import requests
 import yaml
 from bs4 import BeautifulSoup
 
-USER_AGENT = (
-    "NYRR9Plus1VolunteerMonitor/0.1 "
-    "(personal, non-commercial monitoring tool; contact: marcuscalero3@gmail.com)"
-)
+from robots import USER_AGENT, check_robots_allowed
 
 REQUEST_TIMEOUT_SECONDS = 20
 
@@ -100,6 +97,22 @@ def scrape_race(race: dict) -> dict:
             "opportunities": [],
             "matches": [],
             "error": "skipped: robots_allowed is not true",
+        }
+
+    # config/races.yaml's robots_allowed is only ever set by a manual
+    # discovery.py run — it can go stale if NYRR changes robots.txt later.
+    # Re-check the real robots.txt on every single run before fetching, so
+    # this never relies on a cached/hardcoded value.
+    if not check_robots_allowed(url):
+        return {
+            "race_id": race_id,
+            "opportunities": [],
+            "matches": [],
+            "error": (
+                "robots.txt now disallows this URL (config says robots_allowed: "
+                "true, but a fresh check disagrees) — re-run discovery.py and "
+                "update config/races.yaml"
+            ),
         }
 
     try:
