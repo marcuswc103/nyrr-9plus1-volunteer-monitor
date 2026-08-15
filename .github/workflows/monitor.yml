@@ -3,11 +3,17 @@ name: Monitor NYRR 9+1 Volunteer Spots
 "on":
   workflow_dispatch:
   schedule:
-    # Every 30 minutes, UTC. This cadence is a ceiling (SPEC.md) — don't
-    # tighten it without deliberately revisiting that decision. Unlike
-    # reminder.yml's fixed local-time crons, this one doesn't drift across
-    # EST/EDT since "every 30 minutes" means the same thing in any zone.
-    - cron: "*/30 * * * *"
+    # Every 10 minutes, UTC. Deliberately raised from the original 30-min
+    # ceiling (see SPEC.md's original rationale) after weighing cost (needs
+    # a public repo for free unlimited Actions minutes at this cadence —
+    # private-repo free tier doesn't cover it) and NYRR's own site being
+    # bot-conscious (a reCAPTCHA widget was found on these pages during
+    # discovery). If this schedule ever starts triggering canary "monitor
+    # broken" alerts more than occasionally, that's the signal to dial the
+    # frequency back down. Unlike reminder.yml's fixed local-time crons,
+    # this one doesn't drift across EST/EDT since "every 10 minutes" means
+    # the same thing in any zone.
+    - cron: "*/10 * * * *"
 
 permissions:
   contents: write
