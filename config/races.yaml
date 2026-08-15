@@ -1,0 +1,21 @@
+races:
+- race_id: tcs-nyc-marathon-start-volunteers
+  name: TCS New York City Marathon - Start Volunteers
+  url: https://events.nyrr.org/tcs-new-york-city-marathon-start-volunteers
+  robots_allowed: true
+  active: true
+- race_id: race-to-deliver-4m
+  name: Race to Deliver 4M (benefiting God's Love We Deliver)
+  url: https://events.nyrr.org/race-to-deliver-4m-to-benefit-god-s-love-we-deliver-volunteers
+  robots_allowed: true
+  active: true
+- race_id: ted-corbitt-15k
+  name: NYRR Ted Corbitt 15K
+  url: https://events.nyrr.org/nyrr-ted-corbitt-15k-volunteers
+  robots_allowed: true
+  active: true
+- race_id: frosty-5k
+  name: NYRR Frosty 5K
+  url: https://events.nyrr.org/nyrr-frosty-5k-volunteers
+  robots_allowed: true
+  active: true

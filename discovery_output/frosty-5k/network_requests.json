@@ -1,0 +1,83 @@
+[
+  {
+    "url": "https://syndication.twitter.com/settings?session_id=85bde7d45afe8aca0480fec7f70c6d515191b5fa",
+    "method": "GET",
+    "status": 200,
+    "resource_type": "fetch",
+    "content_type": "application/json; charset=utf-8",
+    "is_json": true,
+    "body_file": "xhr_000.json"
+  },
+  {
+    "url": "https://www.facebook.com/x/oauth/status?client_id=764086813707274&input_token&origin=1&redirect_uri=https%3A%2F%2Fevents.nyrr.org%2Fnyrr-frosty-5k-volunteers&sdk=joey&wants_cookie_data=false",
+    "method": "GET",
+    "status": 200,
+    "resource_type": "fetch",
+    "content_type": "text/plain; charset=UTF-8",
+    "is_json": false
+  },
+  {
+    "url": "https://www.google.com/ccm/collect?rcb=4&frm=0&apvc=1&ae=g&auid=83408783.1786820444&dt=NYRR%20Volunteer&en=page_view&dl=https%3A%2F%2Fevents.nyrr.org%2Fnyrr-frosty-5k-volunteers&scrsrc=www.googletagmanager.com&rnd=695444237.1786820444&navt=n&npa=0&ep.ads_data_redaction=0&gtm=45He68c1v9201618139za200zd9201618139xea&gcd=13l3l3l3l1l1&dma=0&tag_exp=115616986~115938465~115938468~118131810~118395334~118897920~118897930~119527019~120385422&tft=1786820444401&tfd=1972&fmt=8",
+    "method": "POST",
+    "status": 200,
+    "resource_type": "fetch",
+    "content_type": "",
+    "is_json": false
+  },
+  {
+    "url": "https://ad.doubleclick.net/ccm/s/collect?auid=83408783.1786820444&gtm=45He68c1v9201618139za200zd9201618139xea&fmt=8",
+    "method": "POST",
+    "status": 204,
+    "resource_type": "fetch",
+    "content_type": "",
+    "is_json": false
+  },
+  {
+    "url": "https://www.google.com/ccm/collect?rcb=15&frm=0&apvc=0&auid=83408783.1786820444&dt=NYRR%20Volunteer&tid=DC-4514619&en=page_view&dl=https%3A%2F%2Fevents.nyrr.org%2Fnyrr-frosty-5k-volunteers&scrsrc=www.googletagmanager.com&rnd=695444237.1786820444&navt=n&npa=0&gtm=45fe68c1v9189915752z89201618139za20gzb9201618139zd9201618139xec&gcd=13l3l3l3l1l1&dma=0&tag_exp=115938465~115938469~118131810~118897920~118897930~119367802~119367810~119527019~120125305~120213116~120385422&tft=1786820444617&tfd=2188&tids=DC-4514619&fmt=8",
+    "method": "POST",
+    "status": 200,
+    "resource_type": "fetch",
+    "content_type": "",
+    "is_json": false
+  },
+  {
+    "url": "https://mgln.ai/init",
+    "method": "GET",
+    "status": 200,
+    "resource_type": "xhr",
+    "content_type": "image/gif",
+    "is_json": false
+  },
+  {
+    "url": "https://mgln.ai/view",
+    "method": "POST",
+    "status": 200,
+    "resource_type": "xhr",
+    "content_type": "image/gif",
+    "is_json": false
+  },
+  {
+    "url": "https://www.google.com/ccm/collect?rcb=17&frm=0&apvc=0&auid=83408783.1786820444&dt=NYRR%20Volunteer&tid=AW-974191570&en=page_view&dl=https%3A%2F%2Fevents.nyrr.org%2Fnyrr-frosty-5k-volunteers&scrsrc=www.googletagmanager.com&rnd=695444237.1786820444&navt=n&npa=0&gtm=45be68c1v869192483z89201618139za20gzb9201618139zd9201618139xec&gcd=13l3l3l3l1l1&dma=0&tag_exp=115938465~115938469~118131810~118897920~118897930~119367802~119367810~119527019~120385422&tft=1786820444798&tfd=2369&tids=AW-974191570&fmt=8",
+    "method": "POST",
+    "status": 200,
+    "resource_type": "fetch",
+    "content_type": "",
+    "is_json": false
+  },
+  {
+    "url": "https://www.google.com/rmkt/collect/974191570/?random=1786820444782&cv=11&fst=1786820444782&fmt=8&bg=ffffff&guid=ON&async=1&en=gtag.config&gtm=45be68c1v869192483z89201618139za20gzb9201618139zd9201618139xec&gcd=13l3l3l3l1l1&dma=0&tag_exp=115938465~115938469~118131810~118897920~118897930~119367802~119367810~119527019~120385422&u_w=1280&u_h=720&url=https%3A%2F%2Fevents.nyrr.org%2Fnyrr-frosty-5k-volunteers&rcb=17&frm=0&tiba=NYRR%20Volunteer&hn=www.googleadservices.com&npa=0&pscdl=noapi&auid=83408783.1786820444&uaa=x86&uab=64&uafvl=Not%253DA%253FBrand%3B99.0.0.0%7CHeadlessChrome%3B151.0.7922.34%7CChromium%3B151.0.7922.34&uamb=0&uam=&uap=Windows&uapv=&uaw=0&data=event%3Dgtag.config&ept=68&gcp=5",
+    "method": "POST",
+    "status": 200,
+    "resource_type": "fetch",
+    "content_type": "",
+    "is_json": false
+  },
+  {
+    "url": "https://analytics.google.com/g/collect?v=2&tid=G-GERLLKBLQG&gtm=45be68c1v869192483z89201618139za20gzb9201618139zd9201618139&_p=1786820443907&_gaz=1&gcd=13l3l3l3l1l1&npa=0&dma=0&_eu=EAAAAGAC&are=1&cid=247492972.1786820445&frm=0&ir=1&pscdl=noapi&rcb=17&sr=1280x720&uaa=x86&uab=64&uafvl=Not%253DA%253FBrand%3B99.0.0.0%7CHeadlessChrome%3B151.0.7922.34%7CChromium%3B151.0.7922.34&uam=&uamb=0&uap=Windows&uapv=&uaw=0&ul=en-us&gaf=2&_s=1&tag_exp=115938465~115938469~118897920~118897930~119367802~119367810~119527019~120385422&sid=1786820444&sct=1&seg=0&dl=https%3A%2F%2Fevents.nyrr.org%2Fnyrr-frosty-5k-volunteers&dt=NYRR%20Volunteer&en=page_view&_fv=1&_nsi=1&_ss=1&tfd=2351",
+    "method": "POST",
+    "status": 204,
+    "resource_type": "fetch",
+    "content_type": "text/plain",
+    "is_json": false
+  }
+]
